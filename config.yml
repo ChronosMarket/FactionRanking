@@ -1,0 +1,15 @@
+Prefix: "[Egypthia] "
+EnablePrefix: true
+
+levelZeroName: "Bronze"
+levelOneName: "Silver"
+levelTwoName: "Gold"
+levelThreeName: "Diamonds"
+levelFourName: "Platine"
+levelFiveName: "Legends"
+
+levelOnePoints: 5
+levelTwoPoints: 10
+levelThreePoints: 15
+levelFourPoints: 20
+levelFivePoints: 25

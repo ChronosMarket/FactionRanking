@@ -1,0 +1,5 @@
+name: FactionRanking
+version: 1.0.0
+main: qc.veko.ranking.FactionRanking
+author: Veko
+depend: [Factions]
