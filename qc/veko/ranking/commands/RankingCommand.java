@@ -28,10 +28,6 @@ public class RankingCommand extends FCommand{
 
 	@Override
 	public void perform(CommandContext arg0) {
-		/*for (int i = 1; i < FactionRanking.getInstance().getTopTen().size()+1; ++i) {
-			Faction faction = Factions.getInstance().getByTag(FactionRanking.getInstance().getTopTen().get(i));
-			arg0.player.getPlayer().sendMessage(i + " : " + faction.getTag() + " §6" + PointsUtils.getFactionTotalPoints(faction));
-		}*/
 		openInventory(arg0.player.getPlayer());
 	}
 
@@ -46,10 +42,6 @@ public class RankingCommand extends FCommand{
 				new RankingSystem(FactionRanking.getInstance().getFactionFileManager());
 				return;
 			}
-		/*for (int i = 1; i < FactionRanking.getInstance().getTopTen().size()+1; ++i) {
-			Faction faction = Factions.getInstance().getByTag(FactionRanking.getInstance().getTopTen().get(i));
-			player.sendMessage(i + " : " + faction.getTag() + " §6" + PointsUtils.getFactionTotalPoints(faction));
-		}*/
 		openInventory(player);
 	}
 
