@@ -11,10 +11,10 @@ public class ConfigManager {
 
 	private String levelZeroName;
 	private Map<String, Integer> levelOne = new HashMap<>();
-	private Map<String, Integer> levelTwo = new HashMap<>();;
-	private Map<String, Integer> levelThree = new HashMap<>();;
-	private Map<String, Integer> levelFour  = new HashMap<>();;
-	private Map<String, Integer> levelFive = new HashMap<>();;
+	private Map<String, Integer> levelTwo = new HashMap<>();
+	private Map<String, Integer> levelThree = new HashMap<>();
+	private Map<String, Integer> levelFour  = new HashMap<>();
+	private Map<String, Integer> levelFive = new HashMap<>();
 
 	public void loadConfig() {
 		FileConfiguration config = FactionRanking.getInstance().getConfig();

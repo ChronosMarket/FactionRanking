@@ -2,8 +2,10 @@ package qc.veko.ranking.utils;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Lists;
 import com.massivecraft.factions.Faction;
 
 import qc.veko.ranking.manager.ConfigManager;
@@ -103,11 +105,14 @@ public class PointsUtils {
 	
 	public static void createFactionData(Faction faction) {
 		Map<String, Integer> m = new HashMap<>();
+		List<String> l = Lists.newArrayList();
 		m.put("kills", 0);
 		m.put("claims", 0);
 		m.put("events", 0);
 		m.put("deaths", 0);
 		m.put("money", 0);
+		l.add("nothing");
+		FactionFileManager.getBoughtFactionAddon().put(getFactionName(faction), l);
 		FactionFileManager.getFactionsPoints().put(getFactionName(faction), m);
 	}
 	
@@ -134,5 +139,23 @@ public class PointsUtils {
 	private static int getPointsPerLevel(Map<String, Integer> level){
 		return level.values().stream().findFirst().get();
 	}
-	
+
+
+	public static String getRankNamePerLevel(int level) {
+		ConfigManager config = FactionRanking.getInstance().getConfigManager();
+		switch (level){
+			case 1:
+				return getNamePerLevel(config.getLevelOne());
+			case 2:
+				return getNamePerLevel(config.getLevelTwo());
+			case 3:
+				return getNamePerLevel(config.getLevelThree());
+			case 4:
+				return getNamePerLevel(config.getLevelFour());
+			case 5:
+				return getNamePerLevel(config.getLevelFive());
+			default:
+				return config.getLevelZeroName();
+		}
+	}
 }

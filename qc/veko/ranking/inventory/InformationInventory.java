@@ -25,9 +25,9 @@ public class InformationInventory {
 		ItemStack yellow = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 4);
 
 		String owner = faction.getFPlayerAdmin().getName();
-		ItemBuilder head = new ItemBuilder(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal()).setName("§6" + faction.getTag()).setLore(new String[] { "",
+		ItemBuilder head = new ItemBuilder(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal()).setName("§6" + faction.getTag()).setLore("",
 				"§e---------------------------", " ", "§6Chef de faction : §e" + owner, " ",
-				"§e---------------------------"});
+				"§e---------------------------");
 		head.setSkullOwner(owner);
 		inv.setItem(4, head.toItemStack());
 
