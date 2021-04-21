@@ -102,6 +102,12 @@ public class PointsUtils {
 		Map<String, Integer> m = getFactionsPointsMap(faction);
 		return m.get("money");
 	}
+
+	public static void addFactionMoney(Faction faction, int money) {
+		Map<String, Integer> m = getFactionsPointsMap(faction);
+		int moneyBefore = getFactionMoney(faction);
+		m.put("money", moneyBefore + money);
+	}
 	
 	public static void createFactionData(Faction faction) {
 		Map<String, Integer> m = new HashMap<>();

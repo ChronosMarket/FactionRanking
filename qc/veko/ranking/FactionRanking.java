@@ -11,16 +11,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.google.common.collect.Maps;
 import com.massivecraft.factions.P;
 
-import qc.veko.ranking.commands.InformationCommand;
-import qc.veko.ranking.commands.RankingCommand;
+import qc.veko.ranking.commands.*;
 import qc.veko.ranking.commands.engine.CommandFramework;
 import qc.veko.ranking.listener.BasicsListener;
 import qc.veko.ranking.listener.InventoryListener;
 import qc.veko.ranking.manager.ConfigManager;
 import qc.veko.ranking.manager.FactionFileManager;
 import qc.veko.ranking.rank.RankingSystem;
-import qc.veko.ranking.commands.FactionShopCommand;
-import qc.veko.ranking.commands.RankInformationCommand;
 
 public class FactionRanking extends JavaPlugin{
 
@@ -48,6 +45,7 @@ public class FactionRanking extends JavaPlugin{
 		P.p.cmdBase.addSubCommand(new RankingCommand());
 		P.p.cmdBase.addSubCommand(new InformationCommand());
 		P.p.cmdBase.addSubCommand(new FactionShopCommand());
+		P.p.cmdBase.addSubCommand(new FactionInvestCommand());
 
 		Bukkit.getPluginManager().registerEvents(new BasicsListener(), this);
 		Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
