@@ -48,6 +48,6 @@ public class RankingCommand extends FCommand{
 	private void openInventory(Player player) {
 		Faction faction = FPlayers.getInstance().getByPlayer(player).getFaction();
 		RankingInventory rankingInventory = new RankingInventory();
-		player.openInventory(rankingInventory.getInventory(faction));
+		player.openInventory(rankingInventory.getInventory(faction, 1));
 	}
 }

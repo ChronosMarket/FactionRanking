@@ -1,13 +1,17 @@
 package qc.veko.ranking.listener;
 
+import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.Factions;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import qc.veko.ranking.inventory.FactionShopInventory;
+import qc.veko.ranking.inventory.RankingInventory;
 
 public class InventoryListener implements Listener {
 
@@ -25,8 +29,23 @@ public class InventoryListener implements Listener {
         ItemStack current = e.getCurrentItem();
         if (!getCondition(current))
             return;
-        if (e.getInventory().getName().contains("Classement Faction"))
-            e.setCancelled(true);
+        if (!e.getInventory().getName().contains("Classement Faction"))
+            return;
+        e.setCancelled(true);
+        RankingInventory rankingInventory = new RankingInventory();
+        if (e.getCurrentItem().getItemMeta().hasDisplayName() && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Suivant")) {
+            int page = Integer.parseInt(e.getInventory().getName().replace("Classement Faction Page : " , ""));
+            Faction faction = FPlayers.getInstance().getByPlayer((Player)e.getWhoClicked()).getFaction();
+            Inventory inv = rankingInventory.getInventory(faction, page+1);
+            e.getWhoClicked().openInventory(inv);
+        }
+        if (e.getCurrentItem().getItemMeta().hasDisplayName() && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("Precedent")) {
+            int page = Integer.parseInt(e.getInventory().getName().replace("Classement Faction Page : " , ""));
+            Faction faction = FPlayers.getInstance().getByPlayer((Player)e.getWhoClicked()).getFaction();
+            Inventory inv = rankingInventory.getInventory(faction, page-1);
+            e.getWhoClicked().openInventory(inv);
+        }
+
     }
 
     @EventHandler

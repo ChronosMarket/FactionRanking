@@ -36,37 +36,51 @@ public class RankingInventory {
         put(10, 24);
     }};
 
+    @SuppressWarnings("serial")
+    public HashMap<Integer, String> getCategoryPerPage= new HashMap<Integer, String>(){{
+        put(1, "General");
+        put(2, "Events");
+        put(3, "Pvp");
+    }};
 
-    public Inventory getInventory(Faction faction){
-        Inventory inv = Bukkit.createInventory(null, 36, "Classement Faction");
-        ItemBuilder paper = new ItemBuilder(Material.PAPER);
-        paper.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+    public Inventory getInventory(Faction faction, int page){
+        Inventory inv = Bukkit.createInventory(null, 36, "Classement Faction Page : " + page);
+        ItemBuilder itemFrame = new ItemBuilder(Material.ITEM_FRAME).addItemFlags(ItemFlag.HIDE_ENCHANTS);
         ItemStack yellow = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 4);
+        ItemBuilder next = new ItemBuilder(Material.PAPER).setName("Suivant");
+        ItemBuilder before = new ItemBuilder(Material.PAPER).setName("Precedent");
+
+        String category = getCategoryPerPage.get(page);
+        ItemBuilder star = new ItemBuilder(Material.NETHER_STAR).setName("§6Classement Faction").setLore("§eClassement : §6" + category);
+        inv.setItem(4, star.toItemStack());
         for (int i = 1; i < 11; ++i){
-            paper.toItemStack().setAmount(i);
-            Faction rankingFaction = Factions.getInstance().getByTag(getFactionNameByRank(i));
+            itemFrame.toItemStack().setAmount(i);
+            Faction rankingFaction = Factions.getInstance().getByTag(getFactionNameByRank(i, category));
             if (faction == rankingFaction)
-                paper.addUnsafeEnchantment(Enchantment.LURE, 1);
+                itemFrame.addUnsafeEnchantment(Enchantment.LURE, 1);
             if (faction != rankingFaction)
-                paper.removeEnchantment(Enchantment.LURE);
-            paper.setName("§6#" + i + " §e" + getFactionNameByRank(i));
-            if (!getFactionNameByRank(i).equalsIgnoreCase("Aucune")) {
-                paper.setLore("§6 Points : §e" + PointsUtils.getFactionTotalPoints(rankingFaction));
-            } else {
-                paper.setLore("§6 Points : §e0");
-            }
-            inv.setItem(getPlacementPerLevel().get(i), paper.toItemStack());
+                itemFrame.removeEnchantment(Enchantment.LURE);
+            itemFrame.setName("§6#" + i + " §e" + getFactionNameByRank(i, category));
+            if (!getFactionNameByRank(i, category).equalsIgnoreCase("Aucune"))
+                itemFrame.setLore("§6 Points : §e" + FactionRanking.getInstance().getPointsByFaction().get(category).get(rankingFaction.getTag()));
+            else
+                itemFrame.setLore("§6 Points : §e0");
+            inv.setItem(getPlacementPerLevel().get(i), itemFrame.toItemStack());
         }
         for (int i = 0; i < 36; ++i) {
             if (glassInGui().contains(i))
                 inv.setItem(i, yellow);
         }
+        if (page != 1)
+            inv.setItem(28, before.toItemStack());
+        if (page != 3)
+            inv.setItem(34, next.toItemStack());
         return inv;
     }
 
-    private String getFactionNameByRank(int rank) {
-        if (FactionRanking.getInstance().getTopTen().containsKey(rank))
-            return FactionRanking.getInstance().getTopTen().get(rank);
+    private String getFactionNameByRank(int rank, String category) {
+        if (FactionRanking.getInstance().getTopTen().get(category).containsKey(rank))
+            return FactionRanking.getInstance().getTopTen().get(category).get(rank);
         return "Aucune";
     }
 }

@@ -22,7 +22,7 @@ public class BasicsListener implements Listener{
 	    FPlayer fp = FPlayers.getInstance().getByPlayer(p);
 	    if (!e.isCancelled())
 	    	if (fp.hasFaction() && FactionRanking.getInstance().getRankByFaction().containsKey(fp.getFaction().getTag())) {
-	    		int rank = FactionRanking.getInstance().getRankByFaction().get(fp.getFaction().getTag());
+	    		int rank = PointsUtils.getFactionRank(fp.getFaction());
 	    		String level = PointsUtils.getFactionRankName(fp.getFaction());
 	    		e.setFormat("§8[§4#§a"+ rank + "§8] [" + level + "§8]" + e.getFormat());
 	    	} else {

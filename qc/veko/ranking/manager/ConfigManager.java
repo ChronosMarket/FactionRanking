@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import qc.veko.ranking.FactionRanking;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 @Data
 public class ConfigManager {
@@ -25,6 +26,10 @@ public class ConfigManager {
 		getLevelThree().put(getColor("levelThreeName", config), config.getInt("levelThreePoints"));
 		getLevelFour().put(getColor("levelFourName", config), config.getInt("levelFourPoints"));
 		getLevelFive().put(getColor("levelFiveName", config), config.getInt("levelFivePoints"));
+
+		List<String> l = FactionRanking.getInstance().getListOfFactions();
+		l = FactionRanking.getInstance().getFactionListFile().getStringList("factionList");
+
 	}
 
 	private String getColor(String path, FileConfiguration config) {

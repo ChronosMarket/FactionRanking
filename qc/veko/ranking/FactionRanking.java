@@ -1,10 +1,17 @@
 package qc.veko.ranking;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Lists;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,8 +28,10 @@ import qc.veko.ranking.rank.RankingSystem;
 
 public class FactionRanking extends JavaPlugin{
 
-	@Getter private Map<Integer, String> topTen = Maps.newHashMap();
+	@Getter private Map<String,Map<Integer, String>> topTen = Maps.newHashMap();
 	@Getter private Map<String, Integer> rankByFaction = Maps.newHashMap();
+	@Getter private Map<String, Map<String, Integer>> pointsByFaction = Maps.newHashMap();
+	@Getter  private ArrayList<String> listOfFactions = Lists.newArrayList();
 
 	@Getter public static FactionRanking instance;
 
@@ -30,6 +39,9 @@ public class FactionRanking extends JavaPlugin{
 	@Getter FactionFileManager factionFileManager = new FactionFileManager();
 
 	@Getter private Economy economy = null;
+
+	@Getter private File factionList = new File("plugins/FactionRanking", "factionList.yml");
+	@Getter private FileConfiguration factionListFile = YamlConfiguration.loadConfiguration(factionList);
 
 	@SuppressWarnings("deprecation")
 	public void onEnable() {
@@ -70,10 +82,15 @@ public class FactionRanking extends JavaPlugin{
 	
 	
 	private void save() {
-		FactionFileManager saver = new FactionFileManager();
 		FactionFileManager.getFactionsPoints().forEach((name, map) -> {
-			saver.save(name);
+			factionFileManager.save(name);
 		});
+		getFactionListFile().set("factionList", listOfFactions);
+		try {
+			getFactionListFile().save(factionList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public boolean setupEconomy() {

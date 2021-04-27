@@ -27,21 +27,29 @@ public class PointsUtils {
 	 * @return
 	 */
 	public static int getFactionKillsPoints(Faction faction) {
+		if (!FactionRanking.getInstance().getListOfFactions().contains(getFactionName(faction)))
+			FactionRanking.getInstance().getListOfFactions().add(getFactionName(faction));
 		Map<String, Integer> m = getFactionsPointsMap(faction);
 		return (m.get("kills"));
 	}
 	
 	public static int getFactionClaimsPoints(Faction faction) {
+		if (!FactionRanking.getInstance().getListOfFactions().contains(getFactionName(faction)))
+			FactionRanking.getInstance().getListOfFactions().add(getFactionName(faction));
 		Map<String, Integer> m = getFactionsPointsMap(faction);
 		return (m.get("claims"));
 	}
 	
 	public static int getFactionEventsPoints(Faction faction) {
+		if (!FactionRanking.getInstance().getListOfFactions().contains(getFactionName(faction)))
+			FactionRanking.getInstance().getListOfFactions().add(getFactionName(faction));
 		Map<String, Integer> m = getFactionsPointsMap(faction);
 		return (m.get("events"));
 	}
 	
 	public static int getFactionDeathsPoints(Faction faction) {
+		if (!FactionRanking.getInstance().getListOfFactions().contains(getFactionName(faction)))
+			FactionRanking.getInstance().getListOfFactions().add(getFactionName(faction));
 		Map<String, Integer> m = getFactionsPointsMap(faction);
 		return (m.get("deaths"));
 	}

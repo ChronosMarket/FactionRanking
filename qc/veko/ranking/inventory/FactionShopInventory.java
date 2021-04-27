@@ -103,6 +103,14 @@ public class FactionShopInventory {
         return inv;
     }
 
+    public Inventory getShopBuyMenu(String addon, Faction faction) {
+        Inventory inv = Bukkit.createInventory(null, 45, "Shop de faction : " + faction.getTag());
+        putYellowGlass(inv);
+
+        return inv;
+
+    }
+
     private String[] getAddonPerLevel(int level) {
         switch (level){
             case 1:
