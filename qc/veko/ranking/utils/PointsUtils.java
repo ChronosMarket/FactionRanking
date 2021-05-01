@@ -146,6 +146,36 @@ public class PointsUtils {
 		return config.getLevelZeroName();
 			
 	}
+	public static int getLevelByRankName(String name) {
+		ConfigManager config = FactionRanking.getInstance().getConfigManager();
+		if (name.equalsIgnoreCase(getNamePerLevel(config.getLevelFive())))
+			return 5;
+		if (name.equalsIgnoreCase(getNamePerLevel(config.getLevelFour())))
+			return 4;
+		if (name.equalsIgnoreCase(getNamePerLevel(config.getLevelThree())))
+			return 3;
+		if (name.equalsIgnoreCase(getNamePerLevel(config.getLevelTwo())))
+			return 2;
+		if (name.equalsIgnoreCase(getNamePerLevel(config.getLevelOne())))
+			return 1;
+		return 0;
+	}
+
+	public static int getFactionLevel(Faction faction) {
+		int points = getFactionTotalPoints(faction);
+		ConfigManager config = FactionRanking.getInstance().getConfigManager();
+		if (points >= getPointsPerLevel(config.getLevelFive()))
+			return 5;
+		if (points >= getPointsPerLevel(config.getLevelFour()))
+			return 4;
+		if (points >= getPointsPerLevel(config.getLevelThree()))
+			return 3;
+		if (points >= getPointsPerLevel(config.getLevelTwo()))
+			return 2;
+		if (points >= getPointsPerLevel(config.getLevelOne()))
+			return 1;
+		return 0;
+	}
 
 	private static String getNamePerLevel(Map<String, Integer> level){
 		return level.keySet().stream().findFirst().get();

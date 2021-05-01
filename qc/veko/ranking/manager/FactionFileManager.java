@@ -2,6 +2,7 @@ package qc.veko.ranking.manager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class FactionFileManager {
 		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 		PointsUtils.createFactionData(faction);
 		Map<String, Integer> m = getFactionsPoints().get(fac);
-		List<String> l = getBoughtFactionAddon().get(fac);
+		List<String> l = new ArrayList<>();
 		if (!file.exists())
 			return;
 		m.put("kills", config.getInt("kills"));
@@ -53,7 +54,7 @@ public class FactionFileManager {
 		m.put("events", config.getInt("events"));
 		m.put("deaths", config.getInt("deaths"));
 		m.put("money", config.getInt("money"));
-
 		l = config.getStringList("bought");
+		boughtFactionAddon.put(fac, l);
 	}
 }

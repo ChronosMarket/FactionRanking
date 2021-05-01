@@ -27,8 +27,8 @@ public class ConfigManager {
 		getLevelFour().put(getColor("levelFourName", config), config.getInt("levelFourPoints"));
 		getLevelFive().put(getColor("levelFiveName", config), config.getInt("levelFivePoints"));
 
-		List<String> l = FactionRanking.getInstance().getListOfFactions();
-		l = FactionRanking.getInstance().getFactionListFile().getStringList("factionList");
+		FactionRanking.getInstance().setListOfFactions(FactionRanking.getInstance().getFactionListFile().getStringList("factionList"));
+		System.out.println(FactionRanking.getInstance().getListOfFactions().toString());
 
 	}
 

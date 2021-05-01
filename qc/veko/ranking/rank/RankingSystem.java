@@ -52,7 +52,6 @@ public class RankingSystem {
 			factionsPoints.put("Pvp", pvp);
 
 		});
-		System.out.println(factionsPoints.get("General").toString());
 		Map<String, Integer> general = getStreamedMap(getMapPerSection("General"));
 		Map<String, Integer> events = getStreamedMap(getMapPerSection("Events"));
 		Map<String, Integer> pvp = getStreamedMap(getMapPerSection("Pvp"));
