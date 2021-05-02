@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import qc.veko.ranking.utils.AddonUtils;
 import qc.veko.ranking.utils.ItemBuilder;
 import qc.veko.ranking.utils.PointsUtils;
+import qc.veko.ranking.utils.ShopUtils;
 
 import java.util.*;
 
@@ -107,16 +108,14 @@ public class FactionShopInventory {
         if (page != 5)
             inv.setItem(34, next.toItemStack());
         inv.setItem(4, head.toItemStack());
-        if (getAddonPerLevel(page).length == 1) {
-            String[] attout = getAddonPerLevel(page);
-            addon.setName(attout[0]);
-            inv.setItem(22, addon.toItemStack());
-            return inv;
-        }
+
+        List<String> attout = new LinkedList<String>();
+        attout = ShopUtils.getAddonPerLevel(page);
+
         for (int i = 21 ; i <24; ++i) {
-            String[] attout = getAddonPerLevel(page);
             try {
-                addon.setName(attout[i-21]);
+                String name = attout.get(i-21);
+                addon.setName(name).setLore("§6" + ShopUtils.getPricePerAddon(name) + "$");
                 inv.setItem(i, addon.toItemStack());
             } catch (Exception e) {
                 soon.setName("Soon ...");
@@ -136,7 +135,7 @@ public class FactionShopInventory {
                 "§e---------------------------").setSkullOwner(owner);
         ItemBuilder buy = new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (short)5).setName("§6Acheter");
         ItemBuilder decline = new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (short)14).setName("§6Retour");
-        ItemBuilder itemFrame = new ItemBuilder(Material.ITEM_FRAME).setName(addon).addUnsafeEnchantment(Enchantment.LURE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        ItemBuilder itemFrame = new ItemBuilder(Material.ITEM_FRAME).setName(addon).addUnsafeEnchantment(Enchantment.LURE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).setLore("§6" + ShopUtils.getPricePerAddon(addon) + "$");
         ItemBuilder painting = new ItemBuilder(Material.PAINTING).setName("§6Cliquer ici pour ouvrir le shop de faction");
 
         inv.setItem(4, head.toItemStack());
@@ -147,23 +146,6 @@ public class FactionShopInventory {
 
         return inv;
 
-    }
-
-    private String[] getAddonPerLevel(int level) {
-        switch (level){
-            case 1:
-                return new String[] {"fchest9"};
-            case 2:
-                return new String[] {"drop", "powerboost"};
-            case 3:
-                return new String[] {"speed", "fchest18"};
-            case 4:
-                return new String[] {"fly", "nofall"};
-            case 5:
-                return new String[] {"force","fchest27"};
-            default:
-                return new String[] {"nothing"};
-        }
     }
 
 }

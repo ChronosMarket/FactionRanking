@@ -104,7 +104,7 @@ public class InventoryListener implements Listener {
                     if  (e.getCurrentItem().getDurability() == 5) {
                         String addon = e.getInventory().getItem(13).getItemMeta().getDisplayName();
                         e.getWhoClicked().closeInventory();
-                        ShopUtils.buyAddon(addon, 100, (Player) e.getWhoClicked());
+                        ShopUtils.buyAddon(addon, ShopUtils.getPricePerAddon(addon), (Player) e.getWhoClicked());
                         /*List<String> addonList = AddonUtils.getFactionBoughtAddonList(faction);
                         if (!addonList.contains(addon)) {
                             addonList.add(addon);

@@ -13,3 +13,29 @@ levelTwoPoints: 10
 levelThreePoints: 15
 levelFourPoints: 20
 levelFivePoints: 25
+
+levelOneShop:
+  - fchest9
+levelTwoShop:
+  - drop
+  - powerboost
+levelThreeShop:
+  - speed
+  - fchest18
+levelFourShop:
+  - fly
+  - nofall
+levelFiveShop:
+  - force
+  - fchest27
+
+#Price
+fchest9: 30
+drop: 40
+powerboost: 50
+speed: 60
+fchest18: 70
+fly: 80
+nofall: 90
+force: 100
+fchest27: 110
