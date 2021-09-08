@@ -88,7 +88,7 @@ public class FactionRanking extends JavaPlugin{
 		save();
 	}
 	
-	
+	//this Saving system is called every 30 minutes to save every data that is related to this plugin
 	private void save() {
 		getFactionChest().forEach((name, items) -> {
 			try {
